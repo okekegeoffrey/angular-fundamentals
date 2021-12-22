@@ -1,14 +1,33 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "./auth.service";
 
 
 @Component({
   templateUrl: './login.component.html',
+  styles: [`
+    em {
+      float: right;
+      color: #e05c65;
+      padding-left: 10px;
+    }
+  `]
 })
 export class LoginComponent {
   userName:any;
   password:any;
+  mouseoverLogin!:boolean;
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   login(formValues:any) {
-    console.log(formValues);
+    this.authService.loginUser(formValues.userName, formValues.password);
+
+    // after login, it should navigate to all events page
+    this.router.navigate(['events'])
+  }
+
+  cancel() {
+    this.router.navigate(['events'])
   }
 }
