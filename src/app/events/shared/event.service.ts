@@ -14,6 +14,12 @@ export class EventService {
     return subject;
   }
 
+  saveEvent(event:any) {
+    event.id = 999,
+    event.session = [],
+    EVENTS.push(event)
+  }
+
   // a method that will retrieve a single event for our event-details component
   getEvent(id: number):IEvent | undefined {
     return EVENTS.find(event => event.id === id);

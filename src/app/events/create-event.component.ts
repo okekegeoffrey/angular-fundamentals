@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { EventService } from ".";
 
 @Component({
   templateUrl: "create-event.component.html",
@@ -27,13 +28,16 @@ export class CreateEventComponent {
 
   // property that holds the state of this component
   isDirty:boolean = true;
-  constructor(private router: Router){
+  constructor(private router: Router, private eventService: EventService){
 
   }
 
   // handle the form submit event
   saveEvent(formValues:any) {
-    console.log(formValues);
+    this.eventService.saveEvent(formValues);
+    // trigger the isDirty router gaurd
+    this.isDirty = false;
+    this.router.navigate(['/events']);
   }
 
 
